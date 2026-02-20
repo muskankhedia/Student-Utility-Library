@@ -14,76 +14,59 @@ from typing import List
 def fibonacci_dp(n: int) -> int:
     """
     Calculate the nth Fibonacci number using dynamic programming.
-    
-    This is more efficient than the recursive approach for large n.
-    
-    Args:
-        n (int): The position in the Fibonacci sequence (0-indexed)
-        
-    Returns:
-        int: The nth Fibonacci number
-        
-    Examples:
-        >>> fibonacci_dp(10)
-        55
-        >>> fibonacci_dp(0)
-        0
-        >>> fibonacci_dp(1)
-        1
-    
-    TODO: Implement Fibonacci using dynamic programming
-    Hint: Use a table to store previously calculated values
     """
-    # TODO: Implement fibonacci with dynamic programming
-    pass
+    if n <= 1:
+        return n
+
+    # Create DP table
+    dp = [0] * (n + 1)
+    dp[0] = 0
+    dp[1] = 1
+
+    # Fill the table
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+
+    return dp[n]
 
 
 def longest_common_subsequence(str1: str, str2: str) -> int:
     """
     Find the length of the longest common subsequence between two strings.
-    
-    A subsequence is a sequence that can be derived from another sequence
-    by deleting some or no elements without changing the order of remaining elements.
-    
-    Args:
-        str1 (str): First string
-        str2 (str): Second string
-        
-    Returns:
-        int: Length of the longest common subsequence
-        
-    Examples:
-        >>> longest_common_subsequence("ABCDGH", "AEDFHR")
-        3  # "ADH"
-        >>> longest_common_subsequence("AGGTAB", "GXTXAYB")
-        4  # "GTAB"
-    
-    TODO: Implement LCS using dynamic programming
     """
-    # TODO: Implement longest common subsequence
-    pass
+    m = len(str1)
+    n = len(str2)
+
+    # Create DP table (m+1) x (n+1)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = 1 + dp[i - 1][j - 1]
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    return dp[m][n]
 
 
 def knapsack_01(weights: List[int], values: List[int], capacity: int) -> int:
     """
     Solve the 0/1 Knapsack problem using dynamic programming.
-    
-    Given weights and values of n items, put these items in a knapsack of
-    capacity W to get the maximum total value.
-    
-    Args:
-        weights (List[int]): List of item weights
-        values (List[int]): List of item values
-        capacity (int): Knapsack capacity
-        
-    Returns:
-        int: Maximum value that can be obtained
-        
-    Examples:
-        >>> knapsack_01([10, 20, 30], [60, 100, 120], 50)
-        220
-    
-    TODO: Implement 0/1 knapsack using dynamic programming
     """
-    # TODO: Implement 0/1 knapsack problem
-    pass
+    n = len(weights)
+
+    # Create DP table
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            if weights[i - 1] <= w:
+                dp[i][w] = max(
+                    values[i - 1] + dp[i - 1][w - weights[i - 1]],
+                    dp[i - 1][w]
+                )
+            else:
+                dp[i][w] = dp[i - 1][w]
+
+    return dp[n][capacity]
