@@ -121,3 +121,30 @@ def quick_sort(arr: List[Any]) -> List[Any]:
     """
     # TODO: Implement quick sort
     pass
+
+
+def bubble_sort(arr):
+    """
+    This function sorts a list using Bubble Sort
+    and returns a new sorted list.
+    """
+
+    # Make a copy so original list is not changed
+    new_list = arr.copy()
+
+    n = len(new_list)
+
+    # Bubble sort logic
+    for i in range(n):
+        for j in range(n - 1):
+            if new_list[j] > new_list[j + 1]:
+                # Swap elements
+                temp = new_list[j]
+                new_list[j] = new_list[j + 1]
+                new_list[j + 1] = temp
+
+    return new_list
+
+
+
+
