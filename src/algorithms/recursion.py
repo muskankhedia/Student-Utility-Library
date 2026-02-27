@@ -26,11 +26,18 @@ def is_palindrome_recursive(s: str) -> bool:
         True
         >>> is_palindrome_recursive("hello")
         False
-    
-    TODO: Implement palindrome check using recursion
     """
-    # TODO: Implement recursive palindrome check
-    pass
+    
+    # Base Case: if string has 0 or 1 character, it is a palindrome
+    if len(s) <= 1:
+        return True
+    
+    # If first and last characters are not equal, not a palindrome
+    if s[0] != s[-1]:
+        return False
+    
+    # Recursive call on the substring excluding first and last characters
+    return is_palindrome_recursive(s[1:-1])
 
 
 def tower_of_hanoi(n: int, source: str, destination: str, auxiliary: str) -> List[str]:
@@ -38,8 +45,6 @@ def tower_of_hanoi(n: int, source: str, destination: str, auxiliary: str) -> Lis
     Solve the Tower of Hanoi problem.
     
     Move n disks from source rod to destination rod using auxiliary rod.
-    Rules: Only one disk can be moved at a time, and larger disks cannot
-    be placed on smaller disks.
     
     Args:
         n (int): Number of disks
@@ -49,12 +54,24 @@ def tower_of_hanoi(n: int, source: str, destination: str, auxiliary: str) -> Lis
         
     Returns:
         List[str]: List of moves (strings describing each move)
-        
-    Examples:
-        >>> tower_of_hanoi(2, 'A', 'C', 'B')
-        ['Move disk 1 from A to B', 'Move disk 2 from A to C', 'Move disk 1 from B to C']
-    
-    TODO: Implement Tower of Hanoi solution
     """
-    # TODO: Implement Tower of Hanoi
-    pass
+    
+    moves = []
+    
+    def solve(n, source, destination, auxiliary):
+        # Base Case
+        if n == 1:
+            moves.append(f"Move disk 1 from {source} to {destination}")
+            return
+        
+        # Move n-1 disks to auxiliary rod
+        solve(n - 1, source, auxiliary, destination)
+        
+        # Move the largest disk to destination
+        moves.append(f"Move disk {n} from {source} to {destination}")
+        
+        # Move n-1 disks from auxiliary to destination
+        solve(n - 1, auxiliary, destination, source)
+    
+    solve(n, source, destination, auxiliary)
+    return moves
