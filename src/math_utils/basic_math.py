@@ -40,7 +40,7 @@ def factorial(n: int) -> int:
     """
     # Step 1: Check if n is negative and raise ValueError if so
     if n < 0:
-        raise ValueError("Factorial is not defined for negative numbers")
+        raise ValueError("No negative values!!")
     # Step 2: Handle base cases (0 and 1)
     if n <= 1:
         return 1
