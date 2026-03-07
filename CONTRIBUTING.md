@@ -14,7 +14,8 @@ Look for functions marked with:
 # TODO: Implement this function
 ```
 
-Start with easy ones, then move to harder ones.
+try and try until you get success.
+
 
 ---
 
