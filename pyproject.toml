@@ -1,54 +1,115 @@
-[build-system]
-requires = ["setuptools>=45", "wheel"]
-build-backend = "setuptools.build_meta"
+"""
+Basic Mathematical Operations Module
 
-[project]
-name = "student-utility-library"
-version = "0.1.0"
-description = "A collaborative utility library for student contributions"
-readme = "README.md"
-authors = [
-    {name = "Student Contributors", email = "contributors@example.com"}
-]
-license = {text = "MIT"}
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Education",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-]
-requires-python = ">=3.8"
-dependencies = [
-    "typing-extensions>=4.0.0",
-]
+This module contains basic mathematical utility functions.
+Students can contribute by implementing the functions marked with TODO comments.
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "black>=23.0.0",
-    "mypy>=1.0.0",
-    "flake8>=6.0.0",
-]
-docs = [
-    "sphinx>=5.0.0",
-    "sphinx-rtd-theme>=1.0.0",
-]
+Author: Student Contributors
+Last Updated: February 2026
+"""
 
-[tool.black]
-line-length = 88
-target-version = ['py38']
+from typing import Union
 
-[tool.mypy]
-python_version = "3.8"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-v --tb=short"
+def factorial(n: int) -> int:
+    """
+    Calculate the factorial of a non-negative integer.
+    
+    Factorial of n (denoted as n!) is the product of all positive integers 
+    less than or equal to n. By definition, 0! = 1.
+    
+    Args:
+        n (int): Non-negative integer to calculate factorial for
+        
+    Returns:
+        int: The factorial of n
+        
+    Raises:
+        ValueError: If n is negative
+        
+    Examples:
+        >>> factorial(5)
+        120
+        >>> factorial(0)
+        1
+        >>> factorial(1)
+        1
+    """
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers.")
+    if n in (0, 1):
+        return 1
+    
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+
+def power(base: Union[int, float], exponent: int) -> Union[int, float]:
+    """
+    Calculate base raised to the power of exponent.
+    
+    Implemented without using the built-in ** operator or pow() function.
+    
+    Args:
+        base (Union[int, float]): The base number
+        exponent (int): The exponent (positive, negative, or zero)
+        
+    Returns:
+        Union[int, float]: The result of base^exponent
+        
+    Examples:
+        >>> power(2, 3)
+        8
+        >>> power(5, 0)
+        1
+        >>> power(2, -2)
+        0.25
+    """
+    if exponent == 0:
+        return 1
+    
+    result = 1
+    abs_exp = abs(exponent)
+    
+    for _ in range(abs_exp):
+        result *= base
+    
+    if exponent < 0:
+        return 1 / result
+    return result
+
+
+def square_root(number: Union[int, float], precision: float = 1e-10) -> float:
+    """
+    Calculate the square root of a number using Newton's method.
+    
+    Args:
+        number (Union[int, float]): The number to find square root of
+        precision (float): The desired precision (default: 1e-10)
+        
+    Returns:
+        float: The square root of the number
+        
+    Raises:
+        ValueError: If number is negative
+        
+    Examples:
+        >>> square_root(16)
+        4.0
+        >>> square_root(2)  # approximately
+        1.4142135623730951
+    """
+    if number < 0:
+        raise ValueError("Square root is not defined for negative numbers.")
+    if number == 0:
+        return 0.0
+    
+    # Initial guess
+    x = number
+    while True:
+        new_x = 0.5 * (x + number / x)
+        if abs(new_x - x) < precision:
+            return new_x
+        x = new_x
