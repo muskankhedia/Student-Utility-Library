@@ -12,6 +12,10 @@ from typing import Union
 
 
 def factorial(n: int) -> int:
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers")
+    if n == 0 or n == 1:
+        return 1
     """
     Calculate the factorial of a non-negative integer.
     
@@ -45,6 +49,7 @@ def factorial(n: int) -> int:
     if n <= 1:
         return 1
     # Step 3: Calculate factorial using a loop
+main
     result = 1
     for i in range(2, n + 1):
         result *= i
@@ -52,31 +57,19 @@ def factorial(n: int) -> int:
 
 
 def power(base: Union[int, float], exponent: int) -> Union[int, float]:
-    """
-    Calculate base raised to the power of exponent.
-    
-    Implement this without using the built-in ** operator or pow() function.
-    
-    Args:
-        base (Union[int, float]): The base number
-        exponent (int): The exponent (positive, negative, or zero)
-        
-    Returns:
-        Union[int, float]: The result of base^exponent
-        
-    Examples:
-        >>> power(2, 3)
-        8
-        >>> power(5, 0)
-        1
-        >>> power(2, -2)
-        0.25
-    
-    TODO: Implement this function
-    Hint: Handle negative exponents by taking reciprocal. Use iteration or recursion.
-    """
-    # TODO: Implement this function
-    pass
+    if exponent == 0:
+        return 1
+    elif exponent > 0:
+        result = 1
+        for _ in range(exponent):
+            result *= base
+        return result
+    else:
+        # Handle negative exponents
+        result = 1
+        for _ in range(-exponent):
+            result *= base
+        return 1 / result
 
 
 def square_root(number: Union[int, float], precision: float = 1e-10) -> float:
@@ -104,5 +97,4 @@ def square_root(number: Union[int, float], precision: float = 1e-10) -> float:
     TODO: Implement this function
     Hint: Use Newton's method: x_new = (x + number/x) / 2
     """
-    # TODO: Implement this function
     pass
