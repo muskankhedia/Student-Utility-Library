@@ -26,17 +26,11 @@ def linear_search(arr: List[Any], target: Any) -> int:
         
     Returns:
         int: Index of the target element, or -1 if not found
-        
-    Examples:
-        >>> linear_search([2, 3, 4, 10, 40], 10)
-        3
-        >>> linear_search([2, 3, 4, 10, 40], 5)
-        -1
-    
-    TODO: Implement linear search algorithm
     """
-    # TODO: Implement linear search
-    pass
+    for index, element in enumerate(arr):
+        if element == target:
+            return index
+    return -1
 
 
 def binary_search(arr: List[Any], target: Any) -> int:
@@ -55,15 +49,18 @@ def binary_search(arr: List[Any], target: Any) -> int:
         
     Returns:
         int: Index of the target element, or -1 if not found
-        
-    Examples:
-        >>> binary_search([2, 3, 4, 10, 40], 10)
-        3
-        >>> binary_search([2, 3, 4, 10, 40], 5)
-        -1
-    
-    TODO: Implement binary search algorithm
-    Hint: Maintain left and right pointers, compare with middle element
     """
-    # TODO: Implement binary search
-    pass
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1

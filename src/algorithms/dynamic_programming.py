@@ -2,7 +2,6 @@
 Dynamic Programming Algorithms Module
 
 This module contains implementations of dynamic programming algorithms.
-Students can contribute by implementing the functions marked with TODO comments.
 
 Author: Student Contributors
 Last Updated: February 2026
@@ -18,9 +17,12 @@ def fibonacci_dp(n: int) -> int:
     if n <= 1:
         return n
 
+    # Create DP table
     dp = [0] * (n + 1)
+    dp[0] = 0
     dp[1] = 1
 
+    # Fill the table
     for i in range(2, n + 1):
         dp[i] = dp[i - 1] + dp[i - 2]
 
@@ -34,6 +36,7 @@ def longest_common_subsequence(str1: str, str2: str) -> int:
     m = len(str1)
     n = len(str2)
 
+    # Create DP table (m+1) x (n+1)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
 
     for i in range(1, m + 1):
@@ -52,6 +55,7 @@ def knapsack_01(weights: List[int], values: List[int], capacity: int) -> int:
     """
     n = len(weights)
 
+    # Create DP table
     dp = [[0] * (capacity + 1) for _ in range(n + 1)]
 
     for i in range(1, n + 1):

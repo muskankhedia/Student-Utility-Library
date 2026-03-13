@@ -35,14 +35,20 @@ def factorial(n: int) -> int:
         >>> factorial(1)
         1
     
-    TODO: Implement this function
-    Hint: You can use recursion or iteration. Don't forget to handle edge cases!
-    """
     # TODO: Implement this function
+    # Hint: You can use recursion or iteration. Don't forget to handle edge cases!
+    """
     # Step 1: Check if n is negative and raise ValueError if so
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers")
     # Step 2: Handle base cases (0 and 1)
-    # Step 3: Calculate factorial using loop or recursion
-    pass
+    if n <= 1:
+        return 1
+    # Step 3: Calculate factorial using a loop
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
 
 
 def power(base: Union[int, float], exponent: int) -> Union[int, float]:
