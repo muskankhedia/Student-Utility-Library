@@ -2,90 +2,73 @@
 Statistics Module
 
 This module contains statistical calculation functions.
-Students can contribute by implementing the functions marked with TODO comments.
+Students can contribute by implementing statistical functions.
 
 Author: Student Contributors
-Last Updated: February 2026
+Last Updated: March 2026
 """
 
 from typing import List, Union
 
 
-def mean(numbers: List[Union[int, float]]) -> float:
+Number = Union[int, float]
+
+
+def mean(numbers: List[Number]) -> float:
     """
     Calculate the arithmetic mean (average) of a list of numbers.
-    
-    Args:
-        numbers (List[Union[int, float]]): List of numbers
-        
-    Returns:
-        float: The arithmetic mean
-        
-    Raises:
-        ValueError: If the list is empty
-        
-    Examples:
-        >>> mean([1, 2, 3, 4, 5])
-        3.0
-        >>> mean([10, 20])
-        15.0
-    
-    TODO: Implement this function
-    Hint: Sum all numbers and divide by the count
     """
-    # TODO: Implement this function
-    pass
+
+    if not numbers:
+        raise ValueError("The numbers list cannot be empty.")
+
+    total = sum(numbers)
+    count = len(numbers)
+
+    return float(total) / count
 
 
-def median(numbers: List[Union[int, float]]) -> float:
+def median(numbers: List[Number]) -> float:
     """
     Calculate the median of a list of numbers.
-    
-    The median is the middle value when numbers are sorted. If there's an even
-    number of values, it's the average of the two middle values.
-    
-    Args:
-        numbers (List[Union[int, float]]): List of numbers
-        
-    Returns:
-        float: The median value
-        
-    Raises:
-        ValueError: If the list is empty
-        
-    Examples:
-        >>> median([1, 2, 3, 4, 5])
-        3.0
-        >>> median([1, 2, 3, 4])
-        2.5
-    
-    TODO: Implement this function
-    Hint: Sort the list first, then find the middle value(s)
     """
-    # TODO: Implement this function
-    pass
+
+    if not numbers:
+        raise ValueError("The numbers list cannot be empty.")
+
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    middle = n // 2
+
+    if n % 2 == 1:
+        return float(sorted_numbers[middle])
+    else:
+        return (sorted_numbers[middle - 1] + sorted_numbers[middle]) / 2
 
 
-def mode(numbers: List[Union[int, float]]) -> List[Union[int, float]]:
+def mode(numbers: List[Number]) -> List[Number]:
     """
     Find the mode(s) of a list of numbers.
-    
-    The mode is the value(s) that appear most frequently in the dataset.
-    
-    Args:
-        numbers (List[Union[int, float]]): List of numbers
-        
-    Returns:
-        List[Union[int, float]]: List of mode values (can be multiple)
-        
-    Examples:
-        >>> mode([1, 2, 2, 3, 4])
-        [2]
-        >>> mode([1, 1, 2, 2, 3])
-        [1, 2]
-    
-    TODO: Implement this function
-    Hint: Count frequencies, then find values with maximum frequency
     """
-    # TODO: Implement this function
-    pass
+
+    if not numbers:
+        raise ValueError("The numbers list cannot be empty.")
+
+    frequency = {}
+
+    for num in numbers:
+        frequency[num] = frequency.get(num, 0) + 1
+
+    max_freq = max(frequency.values())
+
+    modes = [num for num, freq in frequency.items() if freq == max_freq]
+
+    return sorted(modes)
+
+
+if __name__ == "__main__":
+    data = [1, 2, 2, 3, 4, 4]
+
+    print("Mean:", mean(data))
+    print("Median:", median(data))
+    print("Mode:", mode(data))
