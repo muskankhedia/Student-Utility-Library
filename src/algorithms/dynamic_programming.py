@@ -2,7 +2,6 @@
 Dynamic Programming Algorithms Module
 
 This module contains implementations of dynamic programming algorithms.
-Students can contribute by implementing the functions marked with TODO comments.
 
 Author: Student Contributors
 Last Updated: February 2026
